@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_22_012713) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_26_203114) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -39,10 +39,22 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_22_012713) do
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
   end
 
+  create_table "opening_hours", force: :cascade do |t|
+    t.integer "venue_id", null: false
+    t.integer "day_of_week"
+    t.time "open_time"
+    t.time "close_time"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["venue_id"], name: "index_opening_hours_on_venue_id"
+  end
+
   create_table "tags", force: :cascade do |t|
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "tag_type", default: 0, null: false
+    t.string "display_name"
     t.index ["name"], name: "index_tags_on_name", unique: true
   end
 
@@ -64,11 +76,15 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_22_012713) do
     t.decimal "longitude"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "phone_number"
+    t.string "website"
+    t.text "description"
     t.index ["latitude", "longitude"], name: "index_venues_on_latitude_and_longitude"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "opening_hours", "venues"
   add_foreign_key "venue_tags", "tags"
   add_foreign_key "venue_tags", "venues"
 end

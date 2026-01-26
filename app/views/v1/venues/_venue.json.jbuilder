@@ -1,7 +1,7 @@
 json.id venue.id
 json.name venue.name
 json.price_range venue.price_range
-json.tags venue.tags.pluck(:name)
+json.tags venue.tags_by_type
 json.address venue.address
 json.latitude venue.latitude&.to_f
 json.longitude venue.longitude&.to_f

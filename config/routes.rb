@@ -9,6 +9,6 @@ Rails.application.routes.draw do
   # root "posts#index"
 
   namespace :v1, defaults: { format: :json } do
-    resources :venues, only: [ :index ]
+    resources :venues, only: [ :index, :show ]
   end
 end

@@ -6,6 +6,6 @@ class CreateVenueServices < ActiveRecord::Migration[8.0]
 
       t.timestamps
     end
-    add_index :venue_services, [:venue_id, :service_id], unique: true
+    add_index :venue_services, [ :venue_id, :service_id ], unique: true
   end
 end

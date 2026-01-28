@@ -10,5 +10,8 @@ Rails.application.routes.draw do
 
   namespace :v1, defaults: { format: :json } do
     resources :venues, only: [ :index, :show ]
+    post "auth/register", to: "auth#register"
+    post "auth/login", to: "auth#login"
+    patch "users/profile", to: "users#profile"
   end
 end

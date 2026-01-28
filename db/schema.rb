@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_01_26_203114) do
+ActiveRecord::Schema[8.0].define(version: 2026_01_26_211146) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -56,6 +56,18 @@ ActiveRecord::Schema[8.0].define(version: 2026_01_26_203114) do
     t.integer "tag_type", default: 0, null: false
     t.string "display_name"
     t.index ["name"], name: "index_tags_on_name", unique: true
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", null: false
+    t.string "password_digest"
+    t.string "name", null: false
+    t.string "provider", default: "email"
+    t.string "provider_uid"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["provider", "provider_uid"], name: "index_users_on_provider_and_provider_uid"
   end
 
   create_table "venue_tags", force: :cascade do |t|

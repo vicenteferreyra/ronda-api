@@ -2,6 +2,7 @@
 
 require "open-uri"
 
+User.destroy_all
 VenueTag.destroy_all
 OpeningHour.destroy_all
 Venue.destroy_all
@@ -272,4 +273,11 @@ venues_data.each do |data|
   attach_image(venue, data[:image])
   attach_gallery_images(venue, data[:gallery_images]) if data[:gallery_images]
   create_opening_hours(venue, data[:opening_hours])
+end
+
+# Create test user
+User.find_or_create_by!(email: "test@example.com") do |user|
+  user.name = "Test User"
+  user.password = "password123"
+  user.provider = "email"
 end
